@@ -10,20 +10,13 @@ namespace Developer_Practicum_2
     {
         protected class Dishes
         {
-            public string dishtype {get; set;}
+            public string Dishtype {get; set;}
         }
         static void Main(string[] args)
         {
             string input = Console.ReadLine();
 
-            string output = "" ;
-
-            string[] outputarray = new string[4];
-            int arraycounter = 0;
-            int dishcount1 = 0;
-            int dishcount2 = 0;
-            int dishcount3 = 0;
-            int dishcount4 = 0;
+            var outputlist = new List<string>();
 
             List<Dishes> dishlist = new List<Dishes>();
 
@@ -33,88 +26,149 @@ namespace Developer_Practicum_2
 
             if (inputarray[0] == "morning")
             {
-                inputarray.Skip(1);
+                inputarray = inputarray.Skip(1).ToArray();
                 foreach (string item in inputarray)
                 {
                     dishlist.Add(new Dishes {
-                        dishtype = item
+                        Dishtype = item
                     });
                 }
 
-                var result = dishlist.GroupBy<dishtype>;
+                //var result = dishlist.GroupBy<dishtype>;
+
+                var result = from dish in dishlist
+                             group dish by dish.Dishtype into groupedDisches
+                             orderby groupedDisches.Key
+                             select new {Count= groupedDisches.Count(), Type=groupedDisches.Key };
+
+                var result2 = dishlist.GroupBy(dishes => dishes.Dishtype)
+                                      .OrderBy(group => group.Key)
+                                      .Select(group => new { Count = group.Count(), Type = group.Key });
+
 
                 // group array
 
-                foreach (var item in inputarray)
+                foreach (var item in result)
                 {
-                    switch (item)
+                    switch (item.Type)
                     {
                         case "1":
                             //output = "Eggs";
-                            outputarray[arraycounter] = "Eggs";
-                            arraycounter++;
-                            dishcount1++;
+                            if (item.Count >= 2)
+                            {
+                                outputlist.Add("Eggs(x" + item.Count.ToString() + ")");
+                            }
+                            else
+                            {
+                                outputlist.Add("Eggs");
+                            }
                             break;
 
                         case "2":
                             //output = "Toast";
-                            outputarray[arraycounter] = "Toast";
-                            arraycounter++;
-                            dishcount2++;
+                            if (item.Count >= 2)
+                            {
+                                outputlist.Add("Toast(x" + item.Count.ToString() + ")");
+                            }
+                            else
+                            {
+                                outputlist.Add("Toast");
+                            }
                             break;
 
                         case "3":
                             //output = "Coffee";
-                            outputarray[arraycounter] = "Coffee";
-                            arraycounter++;
-                            dishcount3++;
+                            if (item.Count >= 2)
+                            {
+                                outputlist.Add("Coffee(x" + item.Count.ToString() + ")");
+                            }
+                            else
+                            {
+                                outputlist.Add("Coffee");
+                            }
                             break;
 
                         case "4":
                             //output = "Error";
-                            outputarray[arraycounter] = "Error";
-                            arraycounter++;
-                            dishcount4++;
+                            if (item.Count >= 2)
+                            {
+                                outputlist.Add("Error(x" + item.Count.ToString() + ")");
+                            }
+                            else
+                            {
+                                outputlist.Add("Error");
+                            }
                             break;
                     }
                 }
             }
             else if (inputarray[0] == "night")
             {
-                inputarray.Skip(1);
+                inputarray = inputarray.Skip(1).ToArray();
+                foreach (string item in inputarray)
+                {
+                    dishlist.Add(new Dishes
+                    {
+                        Dishtype = item
+                    });
+                }
 
+                var result = from dish in dishlist
+                             group dish by dish.Dishtype into groupedDisches
+                             orderby groupedDisches.Key
+                             select new { Count = groupedDisches.Count(), Type = groupedDisches.Key };
                 //group array
 
-                foreach (var item in inputarray)
+                foreach (var item in result)
                 {
-                    switch (item)
+                    switch (item.Type)
                     {
                         case "1":
                             //output = "Steak";
-                            outputarray[arraycounter] = "Steak";
-                            arraycounter++;
-                            dishcount1++;
+                            if (item.Count >= 2)
+                            {
+                                outputlist.Add("Steak(x" + item.Count.ToString() + ")");
+                            }
+                            else
+                            {
+                                outputlist.Add("Steak");
+                            }
                             break;
 
                         case "2":
                             //output = "Potato";
-                            outputarray[arraycounter] = "Potato";
-                            arraycounter++;
-                            dishcount2++;
+                            if (item.Count >= 2)
+                            {
+                                outputlist.Add("Potato(x" + item.Count.ToString() + ")");
+                            }
+                            else
+                            {
+                                outputlist.Add("Potato");
+                            }
                             break;
 
                         case "3":
                             //output = "Wine";
-                            outputarray[arraycounter] = "Wine";
-                            arraycounter++;
-                            dishcount3++;
+                            if (item.Count >= 2)
+                            {
+                                outputlist.Add("Wine(x" + item.Count.ToString() + ")");
+                            }
+                            else
+                            {
+                                outputlist.Add("Wine");
+                            }
                             break;
 
                         case "4":
                             //output = "Cake";
-                            outputarray[arraycounter] = "Cake";
-                            arraycounter++;
-                            dishcount4++;
+                            if (item.Count >= 2)
+                            {
+                                outputlist.Add("Cake(x" + item.Count.ToString() + ")");
+                            }
+                            else
+                            {
+                                outputlist.Add("Cake");
+                            }
                             break;
                     }
                 }
@@ -124,7 +178,7 @@ namespace Developer_Practicum_2
                 Console.WriteLine("No available menu");
             }
 
-            Console.WriteLine(String.Join(", ",outputarray));
+            Console.WriteLine(String.Join(", ",outputlist));
         }
     }
 }
