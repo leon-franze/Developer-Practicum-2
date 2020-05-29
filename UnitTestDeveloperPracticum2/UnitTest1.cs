@@ -7,15 +7,17 @@ namespace UnitTestDeveloperPracticum2
     public class PracticumTests
     {
         [TestMethod]
-        public void TestDaytime_Morning()
+        public void TestMethod1()
+        {
+            var waiter = new Waiter();
+        }
+
+        public void TestMethod2()
         {
 
         }
-        public void TestDaytime_Evening()
-        {
 
-        }
-        public void TestDaytime_Error()
+        public void TestMethod3()
         {
 
         }

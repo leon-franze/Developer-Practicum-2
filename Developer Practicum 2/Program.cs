@@ -6,13 +6,13 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Developer_Practicum_2
 {
-    class Program
+    public class Program
     {
         protected class Dishes
         {
             public string Dishtype {get; set;}
         }
-        protected class Waiter {
+        public class Waiter {
             public string processOrder(string input)
             {
                 var outputlist = new List<string>();
