@@ -38,7 +38,7 @@ namespace Developer_Practicum_2
 
                     var result = from dish in dishlist
                                  group dish by dish.Dishtype into groupedDisches
-                                 orderby groupedDisches.Key
+                                 //orderby groupedDisches.Key
                                  select new { Count = groupedDisches.Count(), Type = groupedDisches.Key };
 
                     var result2 = dishlist.GroupBy(dishes => dishes.Dishtype)
@@ -115,7 +115,7 @@ namespace Developer_Practicum_2
 
                     var result = from dish in dishlist
                                  group dish by dish.Dishtype into groupedDisches
-                                 orderby groupedDisches.Key
+                                 //orderby groupedDisches.Key
                                  select new { Count = groupedDisches.Count(), Type = groupedDisches.Key };
                     //group array
 
